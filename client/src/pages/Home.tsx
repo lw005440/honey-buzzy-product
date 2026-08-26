@@ -70,6 +70,7 @@ export default function Home() {
 
         <nav className="desktop-nav" aria-label="Navegação principal">
           <button onClick={() => scrollToSection("produto")}>o pote</button>
+          <button onClick={() => scrollToSection("ingredientes")}>ingredientes</button>
           <button onClick={() => scrollToSection("ritual")}>o ritual</button>
           <button onClick={() => scrollToSection("duvidas")}>perguntas</button>
         </nav>
@@ -90,6 +91,7 @@ export default function Home() {
         {menuOpen && (
           <div className="mobile-menu">
             <button onClick={() => scrollToSection("produto")}>o pote</button>
+            <button onClick={() => scrollToSection("ingredientes")}>ingredientes</button>
             <button onClick={() => scrollToSection("ritual")}>o ritual</button>
             <button onClick={() => scrollToSection("duvidas")}>perguntas</button>
             <button className="mobile-menu-cta" onClick={handleRitualAction}>
@@ -121,6 +123,7 @@ export default function Home() {
               como usar <MoveRight size={18} />
             </button>
           </div>
+          <p className="hero-price">por <strong>R$ 30,00</strong> <span>· 150 ml</span></p>
           <div className="hero-note">
             <span className="tiny-sparkle">✦</span>
             <p>Para quem coleciona pequenos momentos de cuidado.</p>
@@ -171,6 +174,39 @@ export default function Home() {
           <img src={petalIllustration} alt="Ilustração botânica em lilás, uva e dourado" />
           <div className="image-stamp">feito<br />para o<br />seu ritual <span>✦</span></div>
         </div>
+      </section>
+
+      <section className="ingredients-section" id="ingredientes">
+        <div className="ingredients-heading">
+          <p className="eyebrow eyebrow-dark"><span /> ingredientes em destaque</p>
+          <h2>Da amora<br /><em>ao mel.</em></h2>
+          <p>
+            Dois ingredientes que traduzem o universo doce, frutado e vibrante de Pétala Dourada.
+          </p>
+        </div>
+        <div className="ingredients-grid">
+          <article className="ingredient-card ingredient-berry">
+            <span className="ingredient-number">01</span>
+            <div className="ingredient-orb ingredient-orb-berry" aria-hidden="true" />
+            <p className="ingredient-kicker">extrato de amora</p>
+            <h3>Morus Alba<br />Fruit Extract</h3>
+            <p className="ingredient-copy">
+              O extrato de amora traz a referência frutada e violeta que inspira a identidade de Pétala Dourada.
+            </p>
+            <span className="inci-tag">INCI · Morus Alba Fruit Extract</span>
+          </article>
+          <article className="ingredient-card ingredient-honey">
+            <span className="ingredient-number">02</span>
+            <div className="ingredient-orb ingredient-orb-honey" aria-hidden="true" />
+            <p className="ingredient-kicker">mel</p>
+            <h3>Mel</h3>
+            <p className="ingredient-copy">
+              O mel acrescenta a assinatura dourada e sensorial que torna este cuidado ainda mais especial.
+            </p>
+            <span className="inci-tag">INCI · Mel</span>
+          </article>
+        </div>
+        <p className="ingredients-note">Ingredientes em destaque. Para a composição completa, consulte sempre a embalagem do produto.</p>
       </section>
 
       <section className="feature-strip">
@@ -231,6 +267,7 @@ export default function Home() {
         <div className="closeout-copy">
           <p className="eyebrow eyebrow-dark"><span /> Honey Buzzy apresenta</p>
           <h2>Pétala<br /><em>Dourada</em></h2>
+          <p className="product-price"><span>R$</span> 30,00</p>
           <p>Loção corporal desodorante hidratante<br />150 ml · 5.01 fl. oz.</p>
           <button className="button-primary button-primary-dark" onClick={handleRitualAction}>
             colocar no radar <ArrowUpRight size={18} />

@@ -1,0 +1,4 @@
+- [x] Definir a composição da seção de ingredientes com a linguagem visual da embalagem.
+- [x] Inserir o preço de R$ 30,00 nos pontos principais de conversão.
+- [x] Adicionar os ingredientes informados: Morus Alba Fruit Extract e Mel.
+- [x] Validar responsividade, tipagem e compilação da atualização.
