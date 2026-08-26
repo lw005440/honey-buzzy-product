@@ -14,3 +14,5 @@
 - [x] Criar o painel lateral da sacola com itens, subtotal e total demonstrativos.
 - [x] Adicionar seletor de quantidade próximo ao botão de sacola.
 - [x] Validar atualização de quantidade, total e abertura do painel em desktop e mobile.
+- [x] Corrigir a sobreposição entre os cards de benefícios na grade editorial.
+- [x] Validar a seção de benefícios em desktop e mobile sem colisões de conteúdo.
