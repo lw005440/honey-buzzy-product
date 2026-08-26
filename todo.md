@@ -16,3 +16,8 @@
 - [x] Validar atualização de quantidade, total e abertura do painel em desktop e mobile.
 - [x] Corrigir a sobreposição entre os cards de benefícios na grade editorial.
 - [x] Validar a seção de benefícios em desktop e mobile sem colisões de conteúdo.
+- [x] Reposicionar os três cards de benefícios lado a lado em telas amplas.
+- [x] Ajustar a adaptação responsiva dos cards sem sobreposição.
+- [x] Validar a nova composição horizontal em desktop e mobile.
+- [x] Medir em desktop os três cards em uma mesma linha com posições horizontais distintas.
+- [x] Capturar a adaptação visual mobile dos cards após a mudança de composição desktop.

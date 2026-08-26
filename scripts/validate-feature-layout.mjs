@@ -23,12 +23,25 @@ try {
       const overlaps = boxes.some((box, index) => boxes.slice(index + 1).some((other) => (
         box.left < other.right && box.right > other.left && box.top < other.bottom && box.bottom > other.top
       )));
-      return { count: boxes.length, overlaps };
+      return { count: boxes.length, overlaps, boxes };
     });
     if (report.count !== 3 || report.overlaps) {
       throw new Error(`A grade de benefícios falhou em ${viewport.name}: ${JSON.stringify(report)}`);
     }
-    console.log(`${viewport.name}: 3 cards sem sobreposição.`);
+    if (viewport.name === "desktop") {
+      const topSpread = Math.max(...report.boxes.map((box) => box.top)) - Math.min(...report.boxes.map((box) => box.top));
+      const leftsIncrease = report.boxes.every((box, index) => index === 0 || box.left > report.boxes[index - 1].left);
+      if (topSpread > 45 || !leftsIncrease) {
+        throw new Error(`Os cards não ficaram lado a lado no desktop: ${JSON.stringify(report.boxes)}`);
+      }
+      console.log("desktop: 3 cards lado a lado, sem sobreposição.");
+    } else {
+      const stacksVertically = report.boxes.every((box, index) => index === 0 || box.top >= report.boxes[index - 1].bottom - 1);
+      if (!stacksVertically) {
+        throw new Error(`Os cards não ficaram empilhados no mobile: ${JSON.stringify(report.boxes)}`);
+      }
+      console.log("mobile: 3 cards empilhados, sem sobreposição.");
+    }
     await page.close();
   }
 } finally {
