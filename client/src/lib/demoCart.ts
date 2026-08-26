@@ -3,8 +3,8 @@ export type DemoCartNotice = {
   description: string;
 };
 
-export function addDemoCartItem(currentCount: number): number {
-  return currentCount + 1;
+export function addDemoCartItem(currentCount: number, units = 1): number {
+  return currentCount + Math.max(1, units);
 }
 
 export function getDemoCartNotice(itemCount: number): DemoCartNotice {

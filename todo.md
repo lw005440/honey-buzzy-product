@@ -11,3 +11,6 @@
 - [x] Aplicar flutuação suave às pétalas abstratas do ritual.
 - [x] Validar o comportamento visual e a sacola demonstrativa.
 - [x] Testar o estado vazio, a adição de itens e as mensagens sem checkout da sacola local.
+- [x] Criar o painel lateral da sacola com itens, subtotal e total demonstrativos.
+- [x] Adicionar seletor de quantidade próximo ao botão de sacola.
+- [x] Validar atualização de quantidade, total e abertura do painel em desktop e mobile.

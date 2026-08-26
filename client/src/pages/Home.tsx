@@ -8,7 +8,9 @@ import {
   ChevronDown,
   Droplet,
   Menu,
+  Minus,
   MoveRight,
+  Plus,
   ShoppingBag,
   Sparkles,
   Truck,
@@ -21,6 +23,15 @@ const productImage = "/manus-storage/honey-buzzy-petala-dourada_1e7e54ac.png";
 const heroBackdrop = "/manus-storage/honey-buzzy-hero-studio_d083c293.png";
 const petalIllustration = "/manus-storage/honey-buzzy-petal-illustration_82d1822f.png";
 const brandSymbol = "/manus-storage/honey-buzzy-symbol_7c230306.png";
+const unitPrice = 30;
+const maximumQuantity = 9;
+
+function formatBrazilianReal(value: number) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(value);
+}
 
 const faqs = [
   {
@@ -43,7 +54,10 @@ const faqs = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const [cartOpen, setCartOpen] = useState(false);
+  const cartNotice = getDemoCartNotice(cartQuantity);
 
   function scrollToSection(sectionId: string) {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -57,15 +71,23 @@ export default function Home() {
   }
 
   function handleAddToCart() {
-    setCartCount((current) => addDemoCartItem(current));
+    setCartQuantity((current) => addDemoCartItem(current, selectedQuantity));
+    setCartOpen(true);
     toast("Pétala Dourada foi para a sacola", {
-      description: "Você adicionou 1 pote de 150 ml por R$ 30,00 à prévia de sacola.",
+      description: `${selectedQuantity} ${selectedQuantity === 1 ? "pote" : "potes"} de 150 ml foram adicionados à prévia de sacola.`,
     });
   }
 
   function handleOpenCart() {
-    const notice = getDemoCartNotice(cartCount);
-    toast(notice.title, { description: notice.description });
+    setCartOpen(true);
+  }
+
+  function updateSelectedQuantity(delta: number) {
+    setSelectedQuantity((current) => Math.min(maximumQuantity, Math.max(1, current + delta)));
+  }
+
+  function updateCartQuantity(delta: number) {
+    setCartQuantity((current) => Math.min(maximumQuantity, Math.max(0, current + delta)));
   }
 
   return (
@@ -89,10 +111,10 @@ export default function Home() {
           <button onClick={() => scrollToSection("duvidas")}>perguntas</button>
         </nav>
 
-        <button className="cart-button" onClick={handleOpenCart} aria-label={`Abrir sacola, ${cartCount} item${cartCount === 1 ? "" : "s"}`}>
+        <button className="cart-button" onClick={handleOpenCart} aria-label={`Abrir sacola, ${cartQuantity} ${cartQuantity === 1 ? "item" : "itens"}`}>
           <ShoppingBag size={17} strokeWidth={2.1} />
           <span>sacola</span>
-          <b>{cartCount}</b>
+          <b aria-live="polite">{cartQuantity}</b>
         </button>
 
         <button
@@ -117,6 +139,68 @@ export default function Home() {
         )}
       </header>
 
+      {cartOpen && (
+        <div className="cart-overlay" onClick={() => setCartOpen(false)}>
+          <aside
+            className="cart-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cart-drawer-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="drawer-topline"><span>prévia de sacola</span><span>✦</span></div>
+            <div className="cart-drawer-header">
+              <div>
+                <p className="eyebrow eyebrow-dark"><span /> seu ritual</p>
+                <h2 id="cart-drawer-title">Sua sacola</h2>
+              </div>
+              <button className="drawer-close" onClick={() => setCartOpen(false)} aria-label="Fechar sacola"><X size={20} /></button>
+            </div>
+
+            {cartQuantity > 0 ? (
+              <>
+                <article className="cart-line-item">
+                  <div className="cart-product-image"><img src={productImage} alt="Pétala Dourada" /></div>
+                  <div className="cart-line-copy">
+                    <p className="cart-product-kicker">Honey Buzzy apresenta</p>
+                    <h3>Pétala Dourada</h3>
+                    <p>Loção corporal · 150 ml</p>
+                    <div className="cart-line-controls">
+                      <div className="quantity-selector quantity-selector-small" aria-label="Quantidade na sacola">
+                        <button onClick={() => updateCartQuantity(-1)} aria-label="Diminuir quantidade"><Minus size={15} /></button>
+                        <span>{cartQuantity}</span>
+                        <button onClick={() => updateCartQuantity(1)} disabled={cartQuantity >= maximumQuantity} aria-label="Aumentar quantidade"><Plus size={15} /></button>
+                      </div>
+                      <button className="remove-cart-item" onClick={() => setCartQuantity(0)}>remover</button>
+                    </div>
+                  </div>
+                  <strong className="cart-line-price">{formatBrazilianReal(unitPrice * cartQuantity)}</strong>
+                </article>
+
+                <div className="cart-summary">
+                  <div><span>Subtotal</span><strong>{formatBrazilianReal(unitPrice * cartQuantity)}</strong></div>
+                  <div><span>Frete</span><strong className="free-shipping-label">grátis</strong></div>
+                  <div className="cart-total"><span>Total</span><strong>{formatBrazilianReal(unitPrice * cartQuantity)}</strong></div>
+                </div>
+                <div className="cart-demo-note"><Sparkles size={15} /><p>Esta é uma prévia demonstrativa. Não há checkout nem cobrança.</p></div>
+                <button className="cart-finish-button" onClick={() => toast("Prévia atualizada", { description: "Sua sacola demonstrativa foi mantida sem checkout." })}>
+                  continuar explorando <ArrowUpRight size={17} />
+                </button>
+              </>
+            ) : (
+              <div className="cart-empty-state">
+                <div className="cart-empty-icon"><ShoppingBag size={34} /></div>
+                <h3>{cartNotice.title}</h3>
+                <p>{cartNotice.description}</p>
+                <button className="button-primary" onClick={() => { setCartOpen(false); scrollToSection("inicio"); }}>
+                  escolher Pétala Dourada <ArrowUpRight size={17} />
+                </button>
+              </div>
+            )}
+          </aside>
+        </div>
+      )}
+
       <section className="hero-section" id="inicio">
         <div className="hero-art" style={{ backgroundImage: `url(${heroBackdrop})` }} />
         <div className="hero-dots hero-dots-left" aria-hidden="true" />
@@ -132,8 +216,13 @@ export default function Home() {
             Um gesto de cuidado cheio de cor, textura e afeto. Conheça a loção corporal que deixa a rotina mais sua.
           </p>
           <div className="hero-actions">
+            <div className="quantity-selector" aria-label="Quantidade desejada">
+              <button onClick={() => updateSelectedQuantity(-1)} disabled={selectedQuantity <= 1} aria-label="Diminuir quantidade"><Minus size={16} /></button>
+              <span>{selectedQuantity}</span>
+              <button onClick={() => updateSelectedQuantity(1)} disabled={selectedQuantity >= maximumQuantity} aria-label="Aumentar quantidade"><Plus size={16} /></button>
+            </div>
             <button className="button-primary" onClick={handleAddToCart}>
-              colocar na sacola <ShoppingBag size={18} />
+              colocar {selectedQuantity} {selectedQuantity === 1 ? "unidade" : "unidades"} <ShoppingBag size={18} />
             </button>
             <button className="text-button" onClick={() => scrollToSection("ritual")}>
               como usar <MoveRight size={18} />
@@ -306,7 +395,7 @@ export default function Home() {
           <p className="product-price"><span>R$</span> 30,00</p>
           <p>Loção corporal desodorante hidratante<br />150 ml · 5.01 fl. oz.</p>
           <button className="button-primary button-primary-dark" onClick={handleAddToCart}>
-            colocar na sacola <ShoppingBag size={18} />
+            colocar {selectedQuantity} {selectedQuantity === 1 ? "unidade" : "unidades"} <ShoppingBag size={18} />
           </button>
         </div>
         <div className="closeout-product-wrap">

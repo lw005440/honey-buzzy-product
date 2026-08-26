@@ -12,6 +12,7 @@ describe("sacola demonstrativa", () => {
   it("incrementa a quantidade ao adicionar o produto", () => {
     expect(addDemoCartItem(0)).toBe(1);
     expect(addDemoCartItem(1)).toBe(2);
+    expect(addDemoCartItem(2, 3)).toBe(5);
   });
 
   it("deixa claro que uma sacola com itens não gera checkout ou cobrança", () => {
