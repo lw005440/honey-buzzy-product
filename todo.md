@@ -6,3 +6,8 @@
 - [x] Substituir o wordmark Honey Buzzy por uma sequência de Pétala Dourada.
 - [x] Remover a imagem editorial de mel e uva da seção de ritual.
 - [x] Validar a composição refinada em tela desktop e mobile.
+- [x] Adicionar selo de frete grátis ao lado do preço.
+- [x] Incluir uma sacola demonstrativa sem checkout ou cobrança.
+- [x] Aplicar flutuação suave às pétalas abstratas do ritual.
+- [x] Validar o comportamento visual e a sacola demonstrativa.
+- [x] Testar o estado vazio, a adição de itens e as mensagens sem checkout da sacola local.

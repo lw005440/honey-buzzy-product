@@ -4,16 +4,18 @@
  */
 import { useState } from "react";
 import {
-  ArrowDownRight,
   ArrowUpRight,
   ChevronDown,
   Droplet,
   Menu,
   MoveRight,
+  ShoppingBag,
   Sparkles,
+  Truck,
   X,
 } from "lucide-react";
 import { toast } from "sonner";
+import { addDemoCartItem, getDemoCartNotice } from "@/lib/demoCart";
 
 const productImage = "/manus-storage/honey-buzzy-petala-dourada_1e7e54ac.png";
 const heroBackdrop = "/manus-storage/honey-buzzy-hero-studio_d083c293.png";
@@ -41,6 +43,7 @@ const faqs = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [cartCount, setCartCount] = useState(0);
 
   function scrollToSection(sectionId: string) {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -51,6 +54,18 @@ export default function Home() {
     toast("Ritual salvo", {
       description: "Você será a primeira a saber quando Pétala Dourada estiver disponível.",
     });
+  }
+
+  function handleAddToCart() {
+    setCartCount((current) => addDemoCartItem(current));
+    toast("Pétala Dourada foi para a sacola", {
+      description: "Você adicionou 1 pote de 150 ml por R$ 30,00 à prévia de sacola.",
+    });
+  }
+
+  function handleOpenCart() {
+    const notice = getDemoCartNotice(cartCount);
+    toast(notice.title, { description: notice.description });
   }
 
   return (
@@ -74,8 +89,10 @@ export default function Home() {
           <button onClick={() => scrollToSection("duvidas")}>perguntas</button>
         </nav>
 
-        <button className="header-cta" onClick={handleRitualAction}>
-          avisem-me <ArrowUpRight size={15} strokeWidth={2.2} />
+        <button className="cart-button" onClick={handleOpenCart} aria-label={`Abrir sacola, ${cartCount} item${cartCount === 1 ? "" : "s"}`}>
+          <ShoppingBag size={17} strokeWidth={2.1} />
+          <span>sacola</span>
+          <b>{cartCount}</b>
         </button>
 
         <button
@@ -93,8 +110,8 @@ export default function Home() {
             <button onClick={() => scrollToSection("ingredientes")}>ingredientes</button>
             <button onClick={() => scrollToSection("ritual")}>o ritual</button>
             <button onClick={() => scrollToSection("duvidas")}>perguntas</button>
-            <button className="mobile-menu-cta" onClick={handleRitualAction}>
-              avisem-me <ArrowUpRight size={16} />
+            <button className="mobile-menu-cta" onClick={handleAddToCart}>
+              colocar na sacola <ShoppingBag size={16} />
             </button>
           </div>
         )}
@@ -115,8 +132,8 @@ export default function Home() {
             Um gesto de cuidado cheio de cor, textura e afeto. Conheça a loção corporal que deixa a rotina mais sua.
           </p>
           <div className="hero-actions">
-            <button className="button-primary" onClick={() => scrollToSection("produto")}>
-              conhecer o pote <ArrowDownRight size={19} />
+            <button className="button-primary" onClick={handleAddToCart}>
+              colocar na sacola <ShoppingBag size={18} />
             </button>
             <button className="text-button" onClick={() => scrollToSection("ritual")}>
               como usar <MoveRight size={18} />
@@ -147,6 +164,11 @@ export default function Home() {
             <span>R$</span>
             <strong>30</strong>
             <small>,00</small>
+          </div>
+          <div className="shipping-chip" aria-label="Frete grátis">
+            <Truck size={16} strokeWidth={2.1} />
+            <span>frete</span>
+            <strong>grátis</strong>
           </div>
           <p className="product-caption">feito para ficar<br />perto de você</p>
         </div>
@@ -283,8 +305,8 @@ export default function Home() {
           <h2>Pétala<br /><em>Dourada</em></h2>
           <p className="product-price"><span>R$</span> 30,00</p>
           <p>Loção corporal desodorante hidratante<br />150 ml · 5.01 fl. oz.</p>
-          <button className="button-primary button-primary-dark" onClick={handleRitualAction}>
-            colocar no radar <ArrowUpRight size={18} />
+          <button className="button-primary button-primary-dark" onClick={handleAddToCart}>
+            colocar na sacola <ShoppingBag size={18} />
           </button>
         </div>
         <div className="closeout-product-wrap">

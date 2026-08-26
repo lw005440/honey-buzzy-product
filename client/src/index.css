@@ -97,7 +97,7 @@ main { overflow: hidden; }
 .desktop-nav button, .text-button { padding: 4px 0; color: var(--purple-ink); background: transparent; font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; transition: color 180ms var(--ease-out); }
 .desktop-nav button:hover, .text-button:hover { color: var(--pink); }
 
-.header-cta, .button-primary, .button-secondary, .mobile-menu-cta {
+.header-cta, .cart-button, .button-primary, .button-secondary, .mobile-menu-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -107,7 +107,8 @@ main { overflow: hidden; }
 }
 .header-cta { padding: 12px 17px; color: var(--cream); background: var(--purple); border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .header-cta:hover { background: var(--pink); box-shadow: 0 8px 20px rgba(234,92,174,.25); }
-.header-cta:active, .button-primary:active, .button-secondary:active, .mobile-menu-cta:active { transform: scale(.97); }
+.cart-button { padding: 11px 13px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: var(--cream); background: var(--purple); border-radius: 999px; cursor: pointer; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }.cart-button b { min-width: 18px; height: 18px; display: inline-grid; place-items: center; color: var(--purple-ink); background: var(--gold-light); border-radius: 50%; font-size: 9px; letter-spacing: 0; }.cart-button:hover { background: var(--pink); box-shadow: 0 8px 20px rgba(234,92,174,.25); }
+.header-cta:active, .cart-button:active, .button-primary:active, .button-secondary:active, .mobile-menu-cta:active { transform: scale(.97); }
 
 .mobile-menu-toggle { display: none; width: 44px; height: 44px; color: var(--purple-ink); background: var(--lilac-pale); border-radius: 50%; cursor: pointer; }
 .mobile-menu { position: absolute; z-index: 35; top: 82px; right: 20px; left: 20px; padding: 22px; display: grid; gap: 4px; border: 1px solid rgba(83,35,84,.14); background: rgba(255,250,241,.97); box-shadow: 0 24px 55px rgba(57,28,59,.16); border-radius: 18px; backdrop-filter: blur(18px); }
@@ -150,6 +151,7 @@ h1 em, h2 em { color: var(--pink); font-weight: 400; }
 .product-chip span { font-family: "DM Serif Display", serif; font-size: 27px; line-height: .75; letter-spacing: -.05em; }
 .product-chip small { font-size: 9px; font-weight: 800; letter-spacing: .1em; }
 .price-chip { position: absolute; z-index: 3; right: 3%; bottom: 28%; width: 82px; height: 82px; padding: 11px 5px; display: grid; place-content: center; color: var(--cream); background: var(--purple); border: 3px solid var(--cream); border-radius: 50%; box-shadow: 0 9px 19px rgba(55, 27, 56, .2); line-height: .8; text-align: center; transform: rotate(9deg); }.price-chip span { font-size: 9px; font-weight: 800; letter-spacing: .09em; }.price-chip strong { font-family: "DM Serif Display", serif; font-size: 31px; font-weight: 400; letter-spacing: -.08em; }.price-chip small { margin-top: -5px; font-size: 10px; font-weight: 800; letter-spacing: .04em; }
+.shipping-chip { position: absolute; z-index: 3; top: 58%; left: 2%; width: 91px; min-height: 74px; padding: 10px 7px; display: grid; justify-items: center; align-content: center; color: var(--purple-ink); background: var(--gold-light); border: 3px solid var(--cream); border-radius: 50%; box-shadow: 0 9px 17px rgba(110,76,14,.16); line-height: .9; text-align: center; transform: rotate(-11deg); }.shipping-chip svg { margin-bottom: 3px; }.shipping-chip span, .shipping-chip strong { display: block; font-size: 8px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }.shipping-chip strong { font-family: "DM Serif Display", serif; font-size: 16px; font-style: italic; letter-spacing: -.04em; text-transform: none; }
 .product-caption { position: absolute; right: 2%; bottom: 9%; z-index: 3; margin: 0; color: var(--purple); font-family: "DM Serif Display", serif; font-size: 20px; font-style: italic; line-height: .9; letter-spacing: -.04em; transform: rotate(-7deg); }
 .hero-dots { position: absolute; z-index: 1; width: 150px; height: 150px; background-image: radial-gradient(var(--pink) 1.1px, transparent 1.1px); background-size: 12px 12px; opacity: .45; }
 .hero-dots-left { bottom: 0; left: 0; transform: translate(-31%, 31%); }
@@ -262,6 +264,17 @@ h1 em, h2 em { color: var(--pink); font-weight: 400; }
 @keyframes product-float { from { transform: translateY(-5px) rotate(-1deg); } to { transform: translateY(9px) rotate(1deg); } }
 @keyframes spin-soft { to { transform: rotate(360deg); } }
 @keyframes scroll-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes petal-drift-one { 0%, 100% { translate: 0 0; } 50% { translate: 3px -12px; } }
+@keyframes petal-drift-two { 0%, 100% { translate: 0 0; } 50% { translate: -8px -8px; } }
+@keyframes petal-drift-three { 0%, 100% { translate: 0 0; } 50% { translate: 10px -6px; } }
+@keyframes petal-drift-four { 0%, 100% { translate: 0 0; } 50% { translate: -3px 8px; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .petal-one { animation: petal-drift-one 4.4s var(--ease-in-out) infinite; }
+  .petal-two { animation: petal-drift-two 5.2s var(--ease-in-out) .2s infinite; }
+  .petal-three { animation: petal-drift-three 4.8s var(--ease-in-out) .4s infinite; }
+  .petal-four { animation: petal-drift-four 5.6s var(--ease-in-out) .1s infinite; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
@@ -275,8 +288,8 @@ h1 em, h2 em { color: var(--pink); font-weight: 400; }
 }
 
 @media (max-width: 720px) {
-  .announcement-bar { gap: 8px; font-size: 8px; }.site-header { min-height: 73px; padding: 10px 20px; }.brand-symbol { width: 39px; height: 39px; }.brand-wordmark { font-size: 23px; }.desktop-nav, .header-cta { display: none; }.mobile-menu-toggle { display: grid; place-items: center; }
-  .hero-section { min-height: auto; grid-template-columns: 1fr; }.hero-section::after { background: linear-gradient(180deg, rgba(240,231,247,.86) 0%, rgba(240,231,247,.66) 100%); }.hero-copy { padding: 70px 24px 24px; }.hero-copy h1 { max-width: 430px; font-size: clamp(57px, 17.5vw, 82px); }.hero-description { font-size: 14px; }.hero-note { margin-top: 35px; }.hero-product-stage { min-height: 480px; padding: 20px 20px 42px; }.hero-product { width: min(78vw, 370px); max-height: 410px; }.sunburst { width: min(92vw, 480px); }.product-shadow { bottom: 80px; width: 67vw; }.product-chip { top: 15%; left: 10%; }.price-chip { right: 5%; bottom: 23%; width: 73px; height: 73px; }.price-chip strong { font-size: 28px; }.orbit-one { top: 20%; right: 9%; }.orbit-two { bottom: 17%; left: 8%; }.product-caption { right: 8%; bottom: 7%; font-size: 18px; }
+  .announcement-bar { gap: 8px; font-size: 8px; }.site-header { min-height: 73px; padding: 10px 20px; }.brand-symbol { width: 39px; height: 39px; }.brand-wordmark { font-size: 23px; }.desktop-nav, .cart-button { display: none; }.mobile-menu-toggle { display: grid; place-items: center; }
+  .hero-section { min-height: auto; grid-template-columns: 1fr; }.hero-section::after { background: linear-gradient(180deg, rgba(240,231,247,.86) 0%, rgba(240,231,247,.66) 100%); }.hero-copy { padding: 70px 24px 24px; }.hero-copy h1 { max-width: 430px; font-size: clamp(57px, 17.5vw, 82px); }.hero-description { font-size: 14px; }.hero-note { margin-top: 35px; }.hero-product-stage { min-height: 480px; padding: 20px 20px 42px; }.hero-product { width: min(78vw, 370px); max-height: 410px; }.sunburst { width: min(92vw, 480px); }.product-shadow { bottom: 80px; width: 67vw; }.product-chip { top: 15%; left: 10%; }.price-chip { right: 5%; bottom: 23%; width: 73px; height: 73px; }.price-chip strong { font-size: 28px; }.shipping-chip { top: 56%; left: 4%; width: 79px; min-height: 64px; }.shipping-chip strong { font-size: 14px; }.orbit-one { top: 20%; right: 9%; }.orbit-two { bottom: 17%; left: 8%; }.product-caption { right: 8%; bottom: 7%; font-size: 18px; }
   .marquee-row { padding: 14px 0; }.marquee-track { font-size: 10px; }
   .product-intro { display: block; padding: 95px 24px 70px; }.intro-number { margin-bottom: 28px; }.intro-heading h2 { font-size: 55px; }.intro-story { padding-top: 24px; }.intro-image-wrap { min-height: 360px; margin: 50px 0 0; }.intro-image-wrap img { min-height: 360px; }
   .ingredients-section { display: block; padding: 92px 24px 95px; }.ingredients-heading h2 { font-size: 57px; }.ingredients-heading > p:last-child { margin-bottom: 35px; }.ingredients-grid { grid-template-columns: 1fr; gap: 19px; }.ingredient-card { min-height: 335px; padding: 29px 25px; transform: none; }.ingredient-berry { margin-top: 0; border-radius: 30px 6px 27px 6px; }.ingredient-honey { border-radius: 6px 30px 6px 27px; }.ingredient-number { margin-bottom: 43px; }.ingredient-card h3 { font-size: 36px; }.ingredients-note { margin: 25px 0 0; }
