@@ -15,3 +15,11 @@ A medição automatizada complementar confirmou, em viewport desktop de 1280 px 
 A revisão visual em tela ampla confirmou os cards rosa, roxo e creme dispostos lado a lado, mantendo margens entre eles e leitura integral do conteúdo. Em mobile, a regra de empilhamento continua ativa, preservando a separação dos cards em telas compactas.
 
 A validação automatizada final confirmou três cards alinhados horizontalmente em desktop, sem sobreposição, e os mesmos três cards empilhados em mobile, também sem sobreposição. A captura mobile confirmou a leitura visual da disposição final.
+
+## Fundo roxo claro
+
+As capturas em desktop e mobile confirmaram o roxo muito claro como base das superfícies predominantes, com o texto em roxo-escuro e os controles em rosa, roxo e dourado mantendo contraste e leitura adequados.
+
+A validação de contraste mediu razão de 13,45:1 para o texto roxo-escuro sobre o fundo e 4,60:1 para o CTA rosa atualizado, tanto em desktop quanto em mobile.
+
+Nos controles mobile, a validação mediu contraste de 9,89:1 no botão de sacola, 13,45:1 no seletor de quantidade, menu e drawer, e 12,34:1 no botão de fechar o painel lateral.

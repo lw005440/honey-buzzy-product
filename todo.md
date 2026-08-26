@@ -21,3 +21,10 @@
 - [x] Validar a nova composição horizontal em desktop e mobile.
 - [x] Medir em desktop os três cards em uma mesma linha com posições horizontais distintas.
 - [x] Capturar a adaptação visual mobile dos cards após a mudança de composição desktop.
+- [x] Aplicar roxo muito claro como fundo predominante da página.
+- [x] Ajustar superfícies claras para preservar contraste e legibilidade.
+- [x] Validar a paleta de fundo em desktop e mobile.
+- [x] Verificar contraste do fundo roxo claro e do texto em desktop.
+- [x] Verificar contraste do fundo roxo claro e dos controles em mobile.
+- [x] Medir o contraste dos principais controles mobile sobre a nova paleta.
+- [x] Ajustar qualquer controle mobile que não preserve legibilidade adequada.
