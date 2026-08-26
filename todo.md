@@ -2,3 +2,7 @@
 - [x] Inserir o preço de R$ 30,00 nos pontos principais de conversão.
 - [x] Adicionar os ingredientes informados: Morus Alba Fruit Extract e Mel.
 - [x] Validar responsividade, tipagem e compilação da atualização.
+- [x] Adicionar o selo circular de preço no estilo do volume de 150 ml.
+- [x] Substituir o wordmark Honey Buzzy por uma sequência de Pétala Dourada.
+- [x] Remover a imagem editorial de mel e uva da seção de ritual.
+- [x] Validar a composição refinada em tela desktop e mobile.

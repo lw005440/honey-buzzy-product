@@ -18,7 +18,6 @@ import { toast } from "sonner";
 const productImage = "/manus-storage/honey-buzzy-petala-dourada_1e7e54ac.png";
 const heroBackdrop = "/manus-storage/honey-buzzy-hero-studio_d083c293.png";
 const petalIllustration = "/manus-storage/honey-buzzy-petal-illustration_82d1822f.png";
-const ingredientsStill = "/manus-storage/honey-buzzy-ingredients-still-life_fb1e7050.png";
 const brandSymbol = "/manus-storage/honey-buzzy-symbol_7c230306.png";
 
 const faqs = [
@@ -65,7 +64,7 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Honey Buzzy, início">
           <img src={brandSymbol} alt="" className="brand-symbol" />
-          <span className="brand-wordmark">Honey Buzzy</span>
+          <span className="brand-wordmark brand-wordmark-repeat">Pétala Dourada · Pétala Dourada ·</span>
         </a>
 
         <nav className="desktop-nav" aria-label="Navegação principal">
@@ -143,6 +142,11 @@ export default function Home() {
           <div className="product-chip">
             <span>150</span>
             <small>ml</small>
+          </div>
+          <div className="price-chip" aria-label="Preço: R$ 30,00">
+            <span>R$</span>
+            <strong>30</strong>
+            <small>,00</small>
           </div>
           <p className="product-caption">feito para ficar<br />perto de você</p>
         </div>
@@ -237,7 +241,17 @@ export default function Home() {
       <section className="ritual-section" id="ritual">
         <div className="ritual-visual">
           <div className="ritual-pill">um cuidado de cada vez</div>
-          <img src={ingredientsStill} alt="Uvas roxas, pétalas lilás e detalhes dourados em uma composição de beleza" />
+          <p className="ritual-repeat" aria-hidden="true">Pétala Dourada<br />Pétala Dourada<br />Pétala Dourada</p>
+          <div className="ritual-paper-note">
+            <span>ritual da vez</span>
+            <strong>Pausar também<br />é cuidar.</strong>
+          </div>
+          <div className="ritual-petals" aria-hidden="true">
+            <span className="ritual-petal petal-one" />
+            <span className="ritual-petal petal-two" />
+            <span className="ritual-petal petal-three" />
+            <span className="ritual-petal petal-four" />
+          </div>
           <div className="ritual-scribble" aria-hidden="true">✦</div>
         </div>
         <div className="ritual-content">
@@ -309,7 +323,7 @@ export default function Home() {
         <div className="footer-top">
           <a className="brand brand-footer" href="#inicio">
             <img src={brandSymbol} alt="" className="brand-symbol" />
-            <span className="brand-wordmark">Honey Buzzy</span>
+            <span className="brand-wordmark brand-wordmark-repeat">Pétala Dourada · Pétala Dourada ·</span>
           </a>
           <p>Seu ritual pode ser doce,<br />colorido e inteiramente seu.</p>
           <button className="footer-arrow" onClick={() => scrollToSection("inicio")} aria-label="Voltar ao topo"><ArrowUpRight size={25} /></button>
