@@ -33,9 +33,9 @@
 - [x] Corrigir erros de inicialização, build ou servidor encontrados.
 - [x] Validar a abertura do site na nova URL de preview.
 
-- [ ] Resolver o erro de infraestrutura Repository not found do preview gerenciado.
-- [ ] Validar a abertura usando a URL oficial do projeto, sem depender de preview exposto manualmente.
-- [ ] Executar nova revisão visual e funcional no preview oficial após a recuperação da infraestrutura.
+- [x] Resolver o erro de infraestrutura Repository not found do preview gerenciado.
+- [x] Validar a abertura usando a URL oficial do projeto, sem depender de preview exposto manualmente.
+- [x] Executar nova revisão visual e funcional no preview oficial após a recuperação da infraestrutura; a URL responde, porém ainda serve a publicação anterior.
 
 - [x] Preparar uma cópia completa do projeto para download e edição.
 - [x] Criar instruções de execução, edição e publicação.
@@ -53,4 +53,12 @@
 
 - [x] Adicionar teste unitário para preço, total e formatação do checkout demonstrativo.
 - [x] Reexecutar check, testes e build após corrigir a cobertura técnica.
+
+- [ ] Publicar a versão atual com R$ 52,99, saudação, telefone e checkout demonstrativo na URL oficial.
+- [ ] Revisar visual e funcionalmente a URL oficial publicada, incluindo sacola e pagamento demonstrativo.
+- [ ] Confirmar na URL oficial que a versão nova substituiu a anterior.
+
+- [x] Corrigir o diretório de saída da build para gerar dist/public, conforme esperado pela implantação.
+- [x] Validar a estrutura final de dist/public com os assets e o index.html.
+- [ ] Reexecutar check e build e tentar uma nova implantação.
 
