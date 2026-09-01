@@ -15,3 +15,7 @@ A medição automatizada complementar confirmou, em viewport desktop de 1280 px 
 A versão local atualizada foi validada no navegador: o preço aparece como R$ 52,99 no hero, no selo, na apresentação do produto e no total calculado. A mensagem “Olá, eu sou a Pétala Dourada” aparece no canto inferior ao abrir a página, e o telefone 55 99902 8388 foi incluído como link telefônico no rodapé.
 
 O fluxo testado adicionou duas unidades à sacola, calculou R$ 105,98 e abriu a etapa “Pagamento” com formulário demonstrativo, total atualizado e aviso explícito de que nenhum dado é enviado e nenhuma cobrança é realizada.
+
+## Versão sincronizada
+
+Estado sincronizado com o repositório remoto em 01/09/2026; validações técnicas concluídas após a recuperação do projeto.
