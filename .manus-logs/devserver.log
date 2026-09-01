@@ -1,0 +1,15 @@
+[2026-09-01T22:11:47.313Z] Starting dev server with command: pnpm run dev
+[2026-09-01T22:11:50.199Z] > honey-buzzy-product@1.0.0 dev /home/ubuntu/honey-buzzy-product
+[2026-09-01T22:11:50.200Z] > vite --host
+[2026-09-01T22:11:50.626Z] Port 5173 is in use, trying another one...
+[2026-09-01T22:11:50.626Z] VITE v7.3.6  ready in 377 ms
+[2026-09-01T22:11:50.627Z] ➜  Local:   http://localhost:5174/
+[2026-09-01T22:11:50.627Z] ➜  Network: http://169.254.0.21:5174/
+[2026-09-01T22:12:14.625Z] failed to load config from /home/ubuntu/honey-buzzy-product/vite.config.ts
+[2026-09-01T22:12:14.625Z] 10:12:14 PM [vite] Cannot find package '@builder.io/vite-plugin-jsx-loc' imported from /home/ubuntu/honey-buzzy-product/node_modules/.vite-temp/vite.config.ts.timestamp-1788300734607-e81d7849f2fa6.mjs
+[2026-09-01T22:12:14.625Z] 10:12:14 PM [vite] server restart failed
+[2026-09-01T22:12:14.630Z] 10:12:14 PM [vite] (client) page reload index.html
+[2026-09-01T22:12:14.657Z] 10:12:14 PM [vite] (client) page reload client/index.html
+[2026-09-01T22:12:18.135Z] 10:12:18 PM [vite] changed tsconfig file detected: /home/ubuntu/honey-buzzy-product/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2026-09-01T22:12:18.135Z] 10:12:18 PM [vite] vite.config.ts changed, restarting server...
+[2026-09-01T22:12:18.163Z] 10:12:18 PM [vite] server restarted.

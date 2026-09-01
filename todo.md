@@ -28,3 +28,29 @@
 - [x] Verificar contraste do fundo roxo claro e dos controles em mobile.
 - [x] Medir o contraste dos principais controles mobile sobre a nova paleta.
 - [x] Ajustar qualquer controle mobile que não preserve legibilidade adequada.
+
+- [x] Diagnosticar por que o preview não está abrindo.
+- [x] Corrigir erros de inicialização, build ou servidor encontrados.
+- [x] Validar a abertura do site na nova URL de preview.
+
+- [ ] Resolver o erro de infraestrutura Repository not found do preview gerenciado.
+- [ ] Validar a abertura usando a URL oficial do projeto, sem depender de preview exposto manualmente.
+- [ ] Executar nova revisão visual e funcional no preview oficial após a recuperação da infraestrutura.
+
+- [x] Preparar uma cópia completa do projeto para download e edição.
+- [x] Criar instruções de execução, edição e publicação.
+- [x] Validar o pacote final e entregar o arquivo editável.
+
+- [x] Validar a extração do ZIP em uma pasta limpa.
+- [x] Executar pnpm install, pnpm check e pnpm build a partir da cópia extraída.
+- [x] Anexar o ZIP editável na resposta final.
+
+- [x] Atualizar o preço do produto para R$ 52,99 em toda a página.
+- [x] Adicionar uma mensagem de boas-vindas no canto da tela ao abrir o site.
+- [x] Incluir o número de telefone 55 999028388 no rodapé ou contato.
+- [x] Criar uma etapa de checkout demonstrativa após o carrinho.
+- [x] Validar o fluxo completo de compra demonstrativa.
+
+- [x] Adicionar teste unitário para preço, total e formatação do checkout demonstrativo.
+- [x] Reexecutar check, testes e build após corrigir a cobertura técnica.
+

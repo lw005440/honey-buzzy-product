@@ -2,15 +2,18 @@
  * Direção de design: Clube de Pétalas — editorial de beleza em colagem, assimetria gentil,
  * lilás + rosa-pétala + dourado-pólen. O produto é o objeto central da narrativa.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
+  Check,
   ChevronDown,
   Droplet,
   Menu,
   Minus,
   MoveRight,
   Plus,
+  CreditCard,
+  MessageCircle,
   ShoppingBag,
   Sparkles,
   Truck,
@@ -18,20 +21,14 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { addDemoCartItem, getDemoCartNotice } from "@/lib/demoCart";
+import { calculateDemoTotal, DEMO_PRODUCT_PRICE, formatDemoReal } from "@/lib/demoCheckout";
 
-const productImage = "/manus-storage/honey-buzzy-petala-dourada_1e7e54ac.png";
-const heroBackdrop = "/manus-storage/honey-buzzy-hero-studio_d083c293.png";
-const petalIllustration = "/manus-storage/honey-buzzy-petal-illustration_82d1822f.png";
-const brandSymbol = "/manus-storage/honey-buzzy-symbol_7c230306.png";
-const unitPrice = 30;
+const productImage = "/assets/honey-buzzy-product.png";
+const heroBackdrop = "/assets/honey-buzzy-hero-studio.webp";
+const petalIllustration = "/assets/honey-buzzy-petal-illustration.webp";
+const brandSymbol = "/assets/honey-buzzy-symbol.webp";
+const unitPrice = DEMO_PRODUCT_PRICE;
 const maximumQuantity = 9;
-
-function formatBrazilianReal(value: number) {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(value);
-}
 
 const faqs = [
   {
@@ -57,7 +54,14 @@ export default function Home() {
   const [cartQuantity, setCartQuantity] = useState(0);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [cartOpen, setCartOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [welcomeVisible, setWelcomeVisible] = useState(true);
   const cartNotice = getDemoCartNotice(cartQuantity);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setWelcomeVisible(false), 9000);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   function scrollToSection(sectionId: string) {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -79,7 +83,12 @@ export default function Home() {
   }
 
   function handleOpenCart() {
+    setCheckoutOpen(false);
     setCartOpen(true);
+  }
+
+  function handleOpenCheckout() {
+    setCheckoutOpen(true);
   }
 
   function updateSelectedQuantity(delta: number) {
@@ -97,6 +106,14 @@ export default function Home() {
         <span className="announcement-star">✦</span>
         <span>um carinho que fica na pele</span>
       </div>
+
+      {welcomeVisible && (
+        <div className="welcome-bubble" role="status">
+          <button className="welcome-close" onClick={() => setWelcomeVisible(false)} aria-label="Fechar mensagem de boas-vindas"><X size={15} /></button>
+          <MessageCircle size={19} className="welcome-icon" />
+          <div><span>olá, eu sou a</span><strong>Pétala Dourada</strong><p>Seu ritual começa aqui.</p></div>
+        </div>
+      )}
 
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Honey Buzzy, início">
@@ -140,7 +157,7 @@ export default function Home() {
       </header>
 
       {cartOpen && (
-        <div className="cart-overlay" onClick={() => setCartOpen(false)}>
+        <div className="cart-overlay" onClick={() => { setCartOpen(false); setCheckoutOpen(false); }}>
           <aside
             className="cart-drawer"
             role="dialog"
@@ -151,13 +168,28 @@ export default function Home() {
             <div className="drawer-topline"><span>prévia de sacola</span><span>✦</span></div>
             <div className="cart-drawer-header">
               <div>
-                <p className="eyebrow eyebrow-dark"><span /> seu ritual</p>
-                <h2 id="cart-drawer-title">Sua sacola</h2>
+                <p className="eyebrow eyebrow-dark"><span /> {checkoutOpen ? "etapa dois" : "seu ritual"}</p>
+                <h2 id="cart-drawer-title">{checkoutOpen ? "Pagamento" : "Sua sacola"}</h2>
               </div>
-              <button className="drawer-close" onClick={() => setCartOpen(false)} aria-label="Fechar sacola"><X size={20} /></button>
+              <div className="drawer-actions">
+                {checkoutOpen && <button className="drawer-back" onClick={() => setCheckoutOpen(false)}>voltar</button>}
+                <button className="drawer-close" onClick={() => { setCartOpen(false); setCheckoutOpen(false); }} aria-label="Fechar sacola"><X size={20} /></button>
+              </div>
             </div>
 
-            {cartQuantity > 0 ? (
+            {checkoutOpen && cartQuantity > 0 ? (
+              <div className="checkout-panel">
+                <div className="checkout-progress"><span className="is-done"><Check size={12} /> sacola</span><i /><span className="is-current"><CreditCard size={13} /> pagamento</span></div>
+                <p className="checkout-intro">Quase lá. Preencha os dados para simular a finalização do seu pedido.</p>
+                <label>nome completo<input type="text" placeholder="Como podemos chamar você?" /></label>
+                <label>e-mail<input type="email" placeholder="voce@email.com" /></label>
+                <label>telefone<input type="tel" placeholder="55 99902 8388" /></label>
+                <div className="checkout-payment-method"><span>forma de pagamento</span><button type="button" className="payment-option is-selected"><CreditCard size={16} /><span>Pagamento demonstrativo</span><Check size={15} /></button></div>
+                <div className="checkout-total"><span>Total da prévia</span><strong>{formatDemoReal(calculateDemoTotal(cartQuantity, unitPrice))}</strong></div>
+                <p className="checkout-demo-note">Nenhum dado é enviado e nenhuma cobrança é realizada.</p>
+                <button className="cart-finish-button" onClick={() => toast("Prévia de pagamento concluída", { description: "Este checkout é demonstrativo e não processa pagamentos." })}>finalizar prévia <ArrowUpRight size={17} /></button>
+              </div>
+            ) : cartQuantity > 0 ? (
               <>
                 <article className="cart-line-item">
                   <div className="cart-product-image"><img src={productImage} alt="Pétala Dourada" /></div>
@@ -174,17 +206,17 @@ export default function Home() {
                       <button className="remove-cart-item" onClick={() => setCartQuantity(0)}>remover</button>
                     </div>
                   </div>
-                  <strong className="cart-line-price">{formatBrazilianReal(unitPrice * cartQuantity)}</strong>
+                  <strong className="cart-line-price">{formatDemoReal(calculateDemoTotal(cartQuantity, unitPrice))}</strong>
                 </article>
 
                 <div className="cart-summary">
-                  <div><span>Subtotal</span><strong>{formatBrazilianReal(unitPrice * cartQuantity)}</strong></div>
+                  <div><span>Subtotal</span><strong>{formatDemoReal(calculateDemoTotal(cartQuantity, unitPrice))}</strong></div>
                   <div><span>Frete</span><strong className="free-shipping-label">grátis</strong></div>
-                  <div className="cart-total"><span>Total</span><strong>{formatBrazilianReal(unitPrice * cartQuantity)}</strong></div>
+                  <div className="cart-total"><span>Total</span><strong>{formatDemoReal(calculateDemoTotal(cartQuantity, unitPrice))}</strong></div>
                 </div>
-                <div className="cart-demo-note"><Sparkles size={15} /><p>Esta é uma prévia demonstrativa. Não há checkout nem cobrança.</p></div>
-                <button className="cart-finish-button" onClick={() => toast("Prévia atualizada", { description: "Sua sacola demonstrativa foi mantida sem checkout." })}>
-                  continuar explorando <ArrowUpRight size={17} />
+                <div className="cart-demo-note"><Sparkles size={15} /><p>Esta é uma prévia demonstrativa. Não há cobrança.</p></div>
+                <button className="cart-finish-button" onClick={handleOpenCheckout}>
+                  ir para pagamento <CreditCard size={17} />
                 </button>
               </>
             ) : (
@@ -228,7 +260,7 @@ export default function Home() {
               como usar <MoveRight size={18} />
             </button>
           </div>
-          <p className="hero-price">por <strong>R$ 30,00</strong> <span>· 150 ml</span></p>
+          <p className="hero-price">por <strong>R$ 52,99</strong> <span>· 150 ml</span></p>
           <div className="hero-note">
             <span className="tiny-sparkle">✦</span>
             <p>Para quem coleciona pequenos momentos de cuidado.</p>
@@ -249,10 +281,10 @@ export default function Home() {
             <span>150</span>
             <small>ml</small>
           </div>
-          <div className="price-chip" aria-label="Preço: R$ 30,00">
+          <div className="price-chip" aria-label="Preço: R$ 52,99">
             <span>R$</span>
-            <strong>30</strong>
-            <small>,00</small>
+            <strong>52</strong>
+            <small>,99</small>
           </div>
           <div className="shipping-chip" aria-label="Frete grátis">
             <Truck size={16} strokeWidth={2.1} />
@@ -392,7 +424,7 @@ export default function Home() {
         <div className="closeout-copy">
           <p className="eyebrow eyebrow-dark"><span /> Honey Buzzy apresenta</p>
           <h2>Pétala<br /><em>Dourada</em></h2>
-          <p className="product-price"><span>R$</span> 30,00</p>
+          <p className="product-price"><span>R$</span> 52,99</p>
           <p>Loção corporal desodorante hidratante<br />150 ml · 5.01 fl. oz.</p>
           <button className="button-primary button-primary-dark" onClick={handleAddToCart}>
             colocar {selectedQuantity} {selectedQuantity === 1 ? "unidade" : "unidades"} <ShoppingBag size={18} />
@@ -442,7 +474,7 @@ export default function Home() {
         <div className="footer-bottom">
           <span>© 2026 Honey Buzzy</span>
           <span>feito para florescer</span>
-          <span>Pétala Dourada · 150 ml</span>
+          <span><a href="tel:+55999028388">55 99902 8388</a> · Pétala Dourada · 150 ml</span>
         </div>
       </footer>
     </main>
