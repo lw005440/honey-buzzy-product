@@ -60,5 +60,9 @@
 
 - [x] Corrigir o diretório de saída da build para gerar dist/public, conforme esperado pela implantação.
 - [x] Validar a estrutura final de dist/public com os assets e o index.html.
-- [ ] Reexecutar check e build e tentar uma nova implantação.
+- [x] Reexecutar check e build e tentar uma nova implantação.
+
+- [ ] Disparar explicitamente uma nova implantação da versão corrigida após gerar dist/public.
+- [ ] Registrar o resultado da nova implantação antes de encerrar a correção.
+- [ ] Validar na URL oficial que a versão publicada corresponde ao build atual após a nova implantação.
 
