@@ -66,3 +66,7 @@
 - [ ] Registrar o resultado da nova implantação antes de encerrar a correção.
 - [ ] Validar na URL oficial que a versão publicada corresponde ao build atual após a nova implantação.
 
+- [x] Ajustar o script de produção para gerar o entrypoint dist/index.js exigido pelo runtime full-stack.
+- [x] Manter o frontend compilado em dist/public para o passo de upload de assets.
+- [x] Validar o comando start e a inicialização do container localmente antes de republicar.
+
